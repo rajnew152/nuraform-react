@@ -1,0 +1,112 @@
+.cta-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  width: fit-content;
+  min-width: 200px;
+  margin: 0 auto;
+}
+
+button.cta-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+button.cta-button:disabled {
+  cursor: default;
+}
+
+.cta-button.secondary {
+  min-width: 150px;
+  width: fit-content;
+}
+
+.cta-button.secondary .cta-button__text {
+  border: 1px solid #eee;
+  background-color: transparent;
+  color: #0f0f0f;
+  justify-content: center;
+  padding-left: 25%;
+  padding-right: 25%;
+}
+
+.cta-button.secondary .cta-button__arrow-right,
+.cta-button.secondary .cta-button__arrow-left {
+  display: none;
+}
+
+.cta-button.secondary:hover {
+  color: #fff !important;
+}
+
+.cta-button.secondary:hover .cta-button__text {
+  transform: none;
+  color: #fff;
+}
+
+.cta-button.white {
+  color: #0f0f0f;
+}
+
+.cta-button.white .cta-button__text,
+.cta-button.white .cta-button__arrow-left,
+.cta-button.white .cta-button__arrow-right {
+  background-color: #fff;
+}
+
+.cta-button__text {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: #ff633e;
+  font-size: 14px;
+  flex: 1;
+  border-radius: 999px;
+  padding: 2.1rem 3rem;
+  transition: all 0.3s ease;
+}
+
+.cta-button__arrow-left,
+.cta-button__arrow-right {
+  background-color: #ff633e;
+  padding: 1.5rem;
+  border-radius: 100px;
+  font-size: 0;
+  transition: all 0.3s ease;
+}
+
+.cta-button__arrow-left {
+  position: absolute;
+  opacity: 0;
+  left: 0%;
+  transform: translate(-50%) scale(0);
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  color: #fff !important;
+}
+
+.cta-button:hover .cta-button__text {
+  transform: translate(calc(3rem + 27px));
+  background-color: #0f0f0f;
+}
+
+.cta-button:hover .cta-button__arrow-left {
+  opacity: 1;
+  transform: translate(0) scale(1);
+  background-color: #0f0f0f;
+}
+
+.cta-button:hover .cta-button__arrow-right {
+  transform: translate(50%) scale(0);
+  background-color: #0f0f0f;
+}

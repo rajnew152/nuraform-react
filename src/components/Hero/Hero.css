@@ -1,0 +1,662 @@
+.banner {
+  width: 100vw;
+  height: fit-content;
+  padding: 15vh 6vw 10vh;
+  position: relative;
+  z-index: 5;
+}
+
+/* Solid brand orange sits under the WebGL gradient as its fallback. */
+.banner .--bg {
+  position: absolute;
+  top: 0;
+  right: unset;
+  bottom: unset;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ff633e;
+}
+
+.banner__text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  gap: 44vh;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.banner__text .--left {
+  pointer-events: all;
+}
+
+.banner__text .--left > div:first-child h1 {
+  font-family: Antonia;
+  font-variation-settings: 'wght' 425, 'opsz' 48;
+  font-size: 5rem;
+  line-height: 106%;
+  color: #fff;
+}
+
+.banner__text .--left > div:first-child .cta-button {
+  width: 60%;
+  margin: 24px 0;
+}
+
+.banner__text .--left > div:last-child {
+  display: none;
+  color: #fff;
+}
+
+.banner__text .--right {
+  color: #fff;
+}
+
+.banner__text .--right svg {
+  width: 40px;
+  margin-bottom: 8px;
+}
+
+.banner__text .--right p {
+  font-size: 1.8rem;
+}
+
+.banner__motifs {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: unset;
+  bottom: unset;
+  left: 0;
+  overflow: hidden;
+}
+
+.banner__motifs img,
+.banner__motifs svg {
+  display: block;
+}
+
+.banner__motifs .--circle {
+  position: absolute;
+  top: 55%;
+  right: unset;
+  bottom: unset;
+  left: 50%;
+  translate: -40% -50%;
+  width: 110%;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  background: radial-gradient(circle at 30% 25%, #fde3df 0%, #f7c6c6 55%, #f1b0b6 100%);
+  overflow: hidden;
+  z-index: 8;
+}
+
+.banner__motifs .--circle .prompt-bar {
+  position: absolute;
+  top: 50%;
+  right: unset;
+  bottom: 20px;
+  left: 50%;
+  translate: -60% -50%;
+  width: 78%;
+  height: fit-content;
+  background: #3e3e3e4b;
+  color: #fff;
+  backdrop-filter: blur(20px);
+  padding: 2rem 45px 2rem 2rem;
+  font-size: 1.6rem;
+  border-radius: 500px;
+  display: flex;
+  align-items: center;
+  font-family: DMSans;
+  border: 2px solid rgba(255, 255, 255, 0.137254902);
+  box-shadow: 4px 4px 40px #ffffff91;
+  pointer-events: all;
+}
+
+.banner__motifs .--circle .prompt-bar:after {
+  content: '';
+  display: block;
+  background-image: url(/assets/bar-submit.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 42px;
+  height: 100%;
+  aspect-ratio: 1/1;
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  bottom: unset;
+  left: unset;
+  translate: 0 -50%;
+}
+
+.banner__motifs .--circle .caret {
+  content: '';
+  animation: blink 1s infinite steps(1);
+  margin-left: 2px;
+  background: #ff633e;
+  width: 2px;
+  font-weight: 100;
+  height: 110%;
+  color: #ff633e;
+}
+
+@keyframes blink {
+  0%,
+  to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/*
+ * Concentric embossed rings that fill the hero circle. `--voice-0..3` are
+ * written by VoiceGlow while the mic is live (0 at rest): the inner disc
+ * reacts first and each ring outside it follows a beat later, so speech
+ * ripples outward as a soft magenta glow and a slight swell.
+ */
+.banner__motifs .--circle .voice-rings {
+  --voice-0: 0;
+  --voice-1: 0;
+  --voice-2: 0;
+  --voice-3: 0;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.banner__motifs .--circle .voice-rings > * {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+
+.banner__motifs .--circle .voice-rings__halo {
+  width: 100%;
+  box-shadow: inset 0 0 calc(4rem + var(--voice-3) * 22rem) rgba(236, 72, 153, calc(var(--voice-3) * 0.95));
+}
+
+.banner__motifs .--circle .voice-rings__outline {
+  width: 93%;
+  border: calc(1px + var(--voice-3) * 3px) solid rgba(255, 255, 255, calc(0.45 + var(--voice-3) * 0.55));
+  box-shadow: 0 0 calc(var(--voice-3) * 4rem) rgba(255, 255, 255, calc(var(--voice-3) * 0.8));
+  scale: calc(1 + var(--voice-3) * 0.05);
+}
+
+.banner__motifs .--circle .voice-rings__ring {
+  animation: voice-ring-breathe 7s ease-in-out infinite;
+}
+
+.banner__motifs .--circle .voice-rings__ring.--outer {
+  width: 78%;
+  background: radial-gradient(circle at 32% 28%, #fbc2b6, #f2968f 72%);
+  box-shadow:
+    inset 3px 4px 8px rgba(255, 255, 255, 0.55),
+    inset -6px -8px 16px rgba(214, 90, 90, 0.2),
+    10px 16px 40px rgba(214, 90, 100, 0.22),
+    0 0 calc(var(--voice-2) * 14rem) calc(var(--voice-2) * 3.5rem) rgba(236, 72, 153, calc(var(--voice-2) * 0.95));
+  scale: calc(1 + var(--voice-2) * 0.08);
+  filter: brightness(calc(1 + var(--voice-2) * 0.14)) saturate(calc(1 + var(--voice-2) * 0.5));
+}
+
+.banner__motifs .--circle .voice-rings__ring.--middle {
+  width: 60%;
+  background: radial-gradient(circle at 32% 28%, #fccbbb, #f4a198 72%);
+  box-shadow:
+    inset 3px 4px 8px rgba(255, 255, 255, 0.55),
+    inset -5px -7px 14px rgba(214, 90, 90, 0.18),
+    8px 14px 32px rgba(214, 90, 100, 0.22),
+    0 0 calc(var(--voice-1) * 12rem) calc(var(--voice-1) * 3rem) rgba(200, 120, 255, calc(var(--voice-1) * 1));
+  scale: calc(1 + var(--voice-1) * 0.1);
+  filter: brightness(calc(1 + var(--voice-1) * 0.16)) saturate(calc(1 + var(--voice-1) * 0.5));
+  animation-delay: -1.2s;
+}
+
+/* The orb lives only here: the disc clips it and is what `screen` blends onto. */
+.banner__motifs .--circle .voice-rings__ring.--inner {
+  width: 42%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle, rgba(236, 72, 153, calc(var(--voice-0) * 0.45)) 0%, transparent 62%),
+    radial-gradient(circle at 35% 30%, #fed9c8, #f8b4a4 75%);
+  box-shadow:
+    inset 3px 4px 8px rgba(255, 255, 255, 0.6),
+    inset -4px -6px 12px rgba(214, 90, 90, 0.16),
+    6px 10px 26px rgba(214, 90, 100, 0.22),
+    0 0 calc(var(--voice-0) * 10rem) calc(var(--voice-0) * 2.4rem) rgba(236, 72, 153, calc(var(--voice-0) * 1));
+  scale: calc(1 + var(--voice-0) * 0.14);
+  animation-delay: -2.4s;
+}
+
+@keyframes voice-ring-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.012);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner__motifs .--circle .voice-rings__ring {
+    animation: none;
+  }
+}
+
+/*
+ * Voice orb. The scene paints onto an opaque black backdrop, which `screen`
+ * drops out against the inner disc, and the hue shift pulls its stock blue
+ * into the hero's magenta/lavender. The radial mask feathers the canvas edge.
+ */
+.banner__motifs .--circle .voice-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 140%;
+  aspect-ratio: 1/1;
+  mix-blend-mode: screen;
+  filter: hue-rotate(40deg) saturate(1.2);
+  -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 70%, transparent 100%);
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.banner__motifs .--circle .voice-glow.is-ready {
+  opacity: 0.75;
+}
+
+.banner__motifs .--circle .voice-glow.is-listening {
+  opacity: 1;
+}
+
+/*
+ * A compact take on the white hero CTA, parked at the bottom of the third ring
+ * (the outer one): centred in the band between the middle ring's edge (80%)
+ * and the outer ring's edge (89%). The circle is square, so % of height works.
+ */
+.banner__motifs .--circle .voice-glow__button {
+  position: absolute;
+  top: calc(84.5% - 2.6rem);
+  left: 50%;
+  translate: -50% 0;
+  min-width: 0;
+  z-index: 1;
+  pointer-events: all;
+  animation: voice-glow-in 0.8s ease both;
+}
+
+.banner__motifs .--circle .voice-glow__button .cta-button__text {
+  padding: 1.3rem 2.2rem;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.banner__motifs .--circle .voice-glow__button .cta-button__arrow-left,
+.banner__motifs .--circle .voice-glow__button .cta-button__arrow-right {
+  padding: 0.9rem;
+}
+
+.banner__motifs .--circle .voice-glow__button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.banner__motifs .--circle .voice-glow__button:hover .cta-button__text {
+  transform: translate(calc(1.8rem + 20px));
+}
+
+.banner__motifs .--circle .voice-glow__button[aria-pressed='true'] .cta-button__text,
+.banner__motifs .--circle .voice-glow__button[aria-pressed='true'] .cta-button__arrow-right {
+  background-color: #ff633e;
+  color: #fff;
+}
+
+.banner__motifs .--circle .voice-glow__button:disabled {
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+@keyframes voice-glow-in {
+  from {
+    opacity: 0;
+    translate: -50% 8px;
+  }
+  to {
+    opacity: 1;
+    translate: -50% 0;
+  }
+}
+
+.banner__motifs .--top {
+  position: absolute;
+  top: 65vh;
+  right: unset;
+  bottom: unset;
+  left: -50%;
+  z-index: 11;
+}
+
+.banner__motifs .--top img {
+  height: 10vh;
+}
+
+.banner__motifs .--bottom {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .banner__text {
+    align-items: flex-start;
+    gap: 24vh;
+  }
+
+  .banner__text .--left {
+    width: 60%;
+  }
+
+  .banner__text .--left > div:first-child h1 {
+    font-size: 7rem;
+    line-height: 106%;
+  }
+
+  .banner__text .--left > div:first-child .cta-button {
+    width: 60%;
+    margin: 24px 0;
+  }
+
+  .banner__text .--left > div:last-child {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .banner__text .--left > div:last-child a {
+    opacity: 0.8;
+    transition: 0.2s;
+  }
+
+  .banner__text .--left > div:last-child a:hover {
+    opacity: 1;
+  }
+
+  .banner__text .--right {
+    width: 45%;
+  }
+
+  .banner__motifs .--circle {
+    width: 65%;
+    position: absolute;
+    top: 54%;
+    right: unset;
+    bottom: unset;
+    left: 68%;
+    translate: -50% -50%;
+  }
+
+  .banner__motifs .--circle .prompt-bar {
+    width: 80%;
+    translate: -50% -50%;
+    padding: 1.8rem 2rem;
+    font-size: 1.9rem;
+  }
+
+  .banner__motifs .--top {
+    position: absolute;
+    top: 65vh;
+    right: -20%;
+    bottom: unset;
+    left: unset;
+    z-index: 11;
+    rotate: -180deg;
+  }
+
+  .banner__motifs .--top img {
+    height: 10vh;
+  }
+}
+
+@media (min-width: 1025px) {
+  .banner {
+    padding: 0;
+  }
+
+  .banner__text {
+    text-align: left;
+    flex-direction: row;
+    align-items: stretch;
+    padding: 0 3vw;
+    position: absolute;
+    top: 20vh;
+    right: unset;
+    bottom: unset;
+    left: 0;
+  }
+
+  .banner__text .--left {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 40%;
+    gap: 18vh;
+  }
+
+  .banner__text .--left > div:first-child h1 {
+    font-size: clamp(4rem, 6vw, 8rem);
+  }
+
+  .banner__text .--left > div:first-child .cta-button {
+    width: 45%;
+    margin: 24px 0;
+  }
+
+  .banner__text .--left > div:last-child {
+    gap: 8px;
+    align-items: flex-start;
+    flex-direction: column;
+    translate: 0 -100%;
+  }
+
+  .banner__text .--right {
+    display: flex;
+    justify-content: left;
+    align-items: flex-end;
+    min-height: 100%;
+    width: 22%;
+  }
+
+  /* Taller than the viewport so the 45%-wide circle is never cropped at the top. */
+  .banner__motifs {
+    position: relative;
+    height: 120vh;
+  }
+
+  .banner__motifs .--circle {
+    position: absolute;
+    top: 50%;
+    right: unset;
+    bottom: unset;
+    left: 50%;
+    translate: -50% -50%;
+    width: 45%;
+    aspect-ratio: 1/1;
+  }
+
+  .banner__motifs .--top {
+    position: absolute;
+    top: 20vh;
+    right: -4%;
+    bottom: unset;
+    left: unset;
+    z-index: 7;
+    rotate: 0deg;
+  }
+
+  .banner__motifs .--top img {
+    height: 14vh;
+  }
+
+  .banner__motifs .--bottom {
+    display: block;
+    position: absolute;
+    top: unset;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .banner__motifs .--bottom div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .banner__motifs .--bottom div img {
+    height: 14vh;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .banner__text .--left {
+    gap: 14vh;
+  }
+}
+
+@media (min-width: 1900px) {
+  .banner__text {
+    position: absolute;
+    top: 18vh;
+    right: unset;
+    bottom: unset;
+    left: 0;
+  }
+
+  .banner__text .--left {
+    width: 30%;
+    gap: 18vh;
+  }
+
+  .banner__text .--left > div:last-child {
+    translate: 0 -180%;
+  }
+}
+
+/*
+ * Photo in the hero circle, sized exactly as on the original site. It is the
+ * first child of the circle, so every voice layer paints on top of it.
+ */
+.banner__motifs .--circle .masked-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 105%;
+  height: auto;
+  opacity: 0;
+  clip-path: circle(0% at 50% 50%);
+  /* Out of rendering until its turn; the carousel makes it visible. */
+  visibility: hidden;
+}
+
+/*
+ * With a photo in the circle, the rings become clear glass so the image shows
+ * through: only their solid peach fills are dropped. All voice-driven styling
+ * (glows, swell, halo, outline, orb) is left exactly as defined above.
+ */
+.banner__motifs .--circle.--photo {
+  background: #f7c6c6;
+}
+
+.banner__motifs .--circle.--photo .voice-rings__ring.--outer,
+.banner__motifs .--circle.--photo .voice-rings__ring.--middle {
+  background: transparent;
+}
+
+/*
+ * The inner disc keeps only its voice-reactive pink bloom. It is screened onto
+ * the photo as a whole, so the orb's black backdrop drops out and only its
+ * light shows, which is what the orb's own `screen` blend did on the old fill.
+ */
+.banner__motifs .--circle.--photo .voice-rings__ring.--inner {
+  background: radial-gradient(circle, rgba(236, 72, 153, calc(var(--voice-0) * 0.45)) 0%, transparent 62%);
+  mix-blend-mode: screen;
+}
+
+/*
+ * Photo stack. z-index 0 makes it its own stacking context, so the photos'
+ * climbing z-index (each newcomer on top) stays inside it and the voice rings,
+ * later in the DOM, always paint above every photo.
+ */
+.banner__motifs .--circle .image-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/*
+ * No resting lines over the photos: the rings' white edge highlights, drop
+ * shadows and the thin outline are hidden. Only the voice-driven parts remain,
+ * so the rings stay invisible at rest and glow and swell while someone speaks.
+ */
+.banner__motifs .--circle.--photo .voice-rings__outline {
+  border-color: rgba(255, 255, 255, calc(var(--voice-3) * 0.9));
+}
+
+.banner__motifs .--circle.--photo .voice-rings__ring.--outer {
+  box-shadow: 0 0 calc(var(--voice-2) * 14rem) calc(var(--voice-2) * 3.5rem)
+    rgba(236, 72, 153, calc(var(--voice-2) * 0.95));
+}
+
+.banner__motifs .--circle.--photo .voice-rings__ring.--middle {
+  box-shadow: 0 0 calc(var(--voice-1) * 12rem) calc(var(--voice-1) * 3rem)
+    rgba(200, 120, 255, calc(var(--voice-1) * 1));
+}
+
+.banner__motifs .--circle.--photo .voice-rings__ring.--inner {
+  box-shadow: 0 0 calc(var(--voice-0) * 10rem) calc(var(--voice-0) * 2.4rem)
+    rgba(236, 72, 153, calc(var(--voice-0) * 1));
+}
+
+/*
+ * With photos, the voice view never brings back the peach rings: the photo
+ * stays, and only the voice layer appears on top of it. The orb is hidden at
+ * rest and fades + scales in smoothly once "Try it with your voice" starts
+ * listening; the rings' voice glows ripple over the photo as the user speaks.
+ */
+.banner__motifs .--circle.--photo .voice-glow {
+  opacity: 0;
+  scale: 0.8;
+  transition:
+    opacity 0.9s ease,
+    scale 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.banner__motifs .--circle.--photo .voice-glow.is-listening {
+  opacity: 1;
+  scale: 1;
+}
+/*
+ * Performance: at rest over the photos the rings are invisible, so skip their
+ * breathing animation and colour filters (each forces extra layer work every
+ * frame while scrolling). Both come back the moment the mic starts listening.
+ */
+.banner__motifs .--circle.--photo:not(:has(.voice-glow.is-listening)) .voice-rings__ring {
+  animation: none;
+  filter: none;
+}

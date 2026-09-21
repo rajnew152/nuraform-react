@@ -1,0 +1,39 @@
+@import './fonts.css';
+
+/* The whole design system is sized off an 8px root, exactly like the original. */
+body,
+html {
+  font-size: 8px;
+}
+
+@media (min-width: 1900px) {
+  body,
+  html {
+    font-size: 9px;
+  }
+}
+
+:root {
+  font-family: DMSans, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  text-decoration: none;
+  display: block;
+  font-size: 1.7rem;
+  color: inherit;
+}
+
+/* ScrollSmoother needs the wrapper to clip its transformed content. */
+#smooth-wrapper {
+  overflow: hidden;
+}

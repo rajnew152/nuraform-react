@@ -1,0 +1,204 @@
+.about .--intro {
+  width: 100vw;
+  height: 300vh;
+  position: relative;
+  /* 0 since the hero moved below the how-it-works section; it was -60vh to tuck under the hero. */
+  margin-top: 0;
+  overflow: hidden;
+}
+
+.about .--intro .--bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  width: 100%;
+  opacity: 1 !important;
+}
+
+.about .--intro .--bg img {
+  transform-origin: center center;
+  will-change: transform, opacity, filter;
+  filter: drop-shadow(2px 2px 50px #ff633e);
+}
+
+.about .--intro .container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  font-size: 4.2rem;
+  font-family: Antonia;
+  font-variation-settings: 'wght' 325, 'opsz' 48;
+}
+
+.about .--intro .container > div {
+  position: absolute;
+  top: 50%;
+  right: unset;
+  bottom: unset;
+  left: 50%;
+  translate: -50% -50%;
+  width: 80%;
+  text-align: center;
+}
+
+.about .--users {
+  position: relative;
+  width: 100vw;
+  height: 500vh;
+  margin-top: -130vh;
+  margin-bottom: -85vh;
+}
+
+.about .--users .container {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.about .--users .parent-circle {
+  width: 150vw;
+  height: 150vw;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.about .--users .parent-circle-left {
+  right: 54%;
+}
+
+.about .--users .parent-circle-right {
+  left: 54%;
+}
+
+.about .--users .circle {
+  position: absolute;
+  inset: 0;
+}
+
+.about .--users .text {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateY(-50%);
+  transform-origin: 0 50%;
+  white-space: nowrap;
+}
+
+.about .--users .text h4 {
+  font-family: DMSans;
+  font-size: 3.6rem;
+  font-weight: 300;
+}
+
+.about .--users .text p {
+  display: none;
+}
+
+.about .--users .image {
+  width: 24vw;
+  height: 24vw;
+  display: block;
+  object-fit: cover;
+  position: absolute;
+  right: 50%;
+  top: 0;
+  transform: translateY(-50%);
+  transform-origin: 100% 50%;
+  border-radius: 50%;
+  filter: drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.13));
+}
+
+@media (min-width: 768px) {
+  .about .--intro .container {
+    font-size: 6.5rem;
+  }
+
+  .about .--intro .container > div {
+    width: 70%;
+    margin: auto;
+  }
+
+  .about .--intro .container .--bg {
+    width: 100%;
+  }
+
+  .about .--users {
+    margin-bottom: -70vh;
+  }
+
+  .about .--users .parent-circle {
+    width: 115vw;
+    height: 115vw;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .about .--users .parent-circle-left {
+    right: 52%;
+  }
+
+  .about .--users .parent-circle-right {
+    left: 52%;
+  }
+
+  .about .--users .text h4 {
+    font-size: 4rem;
+    width: auto;
+  }
+
+  .about .--users .text p {
+    display: block;
+    font-size: 1.4rem;
+    opacity: 0.3;
+    width: 90%;
+    white-space: normal;
+  }
+
+  .about .--users .image {
+    width: 15vw;
+    height: 15vw;
+    display: block;
+    object-fit: cover;
+    position: absolute;
+    right: 50%;
+    top: 0;
+    transform: translateY(-50%);
+    transform-origin: 100% 50%;
+    filter: drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.13));
+  }
+}
+
+@media (min-width: 1025px) {
+  .about .--users {
+    margin-bottom: -85vh;
+  }
+
+  .about .--users .parent-circle {
+    width: 80vw;
+    height: 80vw;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .about .--users .text h4 {
+    font-size: 5rem;
+  }
+
+  .about .--users .text p {
+    font-size: 1.6rem;
+    opacity: 0.3;
+    width: 70%;
+  }
+
+  .about .--users .image {
+    width: 12vw;
+    height: 12vw;
+  }
+}

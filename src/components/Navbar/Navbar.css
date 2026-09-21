@@ -1,0 +1,377 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 6vw;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  z-index: 100;
+  color: #fff;
+}
+
+.nav:before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  mask-image: linear-gradient(to bottom, #000 25%, #0000);
+  -webkit-mask-image: linear-gradient(to bottom, rgb(0, 0, 0) 25%, rgba(0, 0, 0, 0) 100%);
+  transition: 0.4s ease-in;
+}
+
+.nav.white .nav__logo {
+  color: #fff;
+}
+
+.nav.white .nav__logo svg {
+  color: inherit;
+}
+
+.nav.white .nav__links {
+  color: #454545;
+  background: #ffffff47;
+}
+
+.nav.white .nav__links:hover {
+  background: #fff;
+  backdrop-filter: blur(0px);
+}
+
+.nav.white .nav__menu-btn span {
+  background-color: #fff;
+}
+
+.nav__links {
+  display: none;
+}
+
+.nav__logo {
+  display: flex;
+  gap: 8px;
+}
+
+.nav__logo svg {
+  transition: 0.3s;
+}
+
+.nav__logo .__mark svg {
+  width: 46px;
+  color: #ff633e;
+}
+
+.nav__logo .__name svg {
+  width: 116px;
+  color: #0f0f0f;
+}
+
+/* BETTERPITCH wordmark: bold condensed caps, dark + brand orange. */
+.nav__logo .__wordmark {
+  font-family: Anton, Impact, 'Arial Narrow', sans-serif;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.nav__logo .__wordmark span {
+  transition: color 0.3s;
+}
+
+.nav__logo .__wordmark .--better {
+  color: #0f0f0f;
+}
+
+.nav__logo .__wordmark .--pitch {
+  color: #ff633e;
+}
+
+/* Over the heroes the orange half would vanish, so flip to white + dark. */
+.nav.white .nav__logo .__wordmark .--better {
+  color: #fff;
+}
+
+.nav.white .nav__logo .__wordmark .--pitch {
+  color: #0f0f0f;
+}
+
+.nav__contact {
+  text-align: right;
+}
+
+.nav__menu-btn {
+  width: 40px;
+  height: 20px;
+  position: relative;
+  cursor: pointer;
+  z-index: 11;
+}
+
+.nav__menu-btn span {
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background-color: #0f0f0f;
+  transition: transform 0.4s ease, all 0.3s ease;
+}
+
+.nav__menu-btn span:nth-child(1) {
+  top: 20%;
+  left: 0;
+  transform-origin: left;
+}
+
+.nav__menu-btn span:nth-child(2) {
+  bottom: 20%;
+  left: 0;
+  transform-origin: right;
+}
+
+.nav__menu-btn span:nth-child(3),
+.nav__menu-btn span:nth-child(4) {
+  width: 58%;
+  opacity: 0;
+}
+
+.nav__menu-btn span:nth-child(3) {
+  top: 5%;
+  left: 33%;
+  transform-origin: top left;
+  transform: rotate(45deg) scaleX(0);
+}
+
+.nav__menu-btn span:nth-child(4) {
+  bottom: 5%;
+  left: 33%;
+  transform-origin: bottom left;
+  transform: rotate(-45deg) scaleX(0);
+}
+
+.nav__menu-btn.open span:nth-child(1) {
+  transform: scaleX(0);
+}
+
+.nav__menu-btn.open span:nth-child(2) {
+  transform: scaleX(0);
+}
+
+.nav__menu-btn.open span:nth-child(3),
+.nav__menu-btn.open span:nth-child(4) {
+  transform: rotate(45deg) scaleX(1);
+  opacity: 1;
+}
+
+.nav__menu-btn.open span:nth-child(4) {
+  transform: rotate(-45deg) scaleX(1);
+}
+
+.nav__menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  visibility: hidden;
+  transition: transform 0.5s ease;
+  z-index: 99;
+  overflow: hidden;
+}
+
+.nav__menu .bg {
+  height: 101%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000000d4;
+  opacity: 0;
+  backdrop-filter: blur(20px);
+  transition: 0.2s;
+}
+
+.nav__menu .content {
+  width: 100%;
+  padding: 14vh 6vw 2vh 6vw;
+  background-color: #fff;
+  transform: translateY(-100%);
+  transition: all 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.nav__menu .content .--cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.nav__menu .content .--cta > .cta-button {
+  width: 60%;
+  min-width: auto;
+}
+
+.nav__menu .content .--cta > .cta-button:first-of-type {
+  width: 40%;
+}
+
+.nav__menu .content .--cta > .cta-button:first-of-type .cta-button__arrow-left,
+.nav__menu .content .--cta > .cta-button:first-of-type .cta-button__arrow-right {
+  display: none;
+}
+
+.nav__menu .content .--cta > .cta-button:first-of-type .cta-button__text {
+  justify-content: center;
+  background-color: transparent;
+  border: 1px solid #eee;
+  color: #0f0f0f;
+}
+
+.nav__menu .content .--cta > .cta-button:first-of-type:hover .cta-button__text {
+  transform: translate(0);
+}
+
+.nav__menu .links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.nav__menu .links li {
+  overflow: hidden;
+  width: 100%;
+  padding: 5px 0;
+  margin: -5px;
+}
+
+.nav__menu .links li:nth-child(1) a {
+  transition-delay: 0.1s;
+}
+
+.nav__menu .links li:nth-child(2) a {
+  transition-delay: 0.15s;
+}
+
+.nav__menu .links li:nth-child(3) a {
+  transition-delay: 0.2s;
+}
+
+.nav__menu .links li:nth-child(4) a {
+  transition-delay: 0.25s;
+}
+
+.nav__menu .links li:nth-last-child(2) a {
+  font-family: DMSans;
+  opacity: 0.6;
+  font-size: 2rem;
+  transition-delay: 0.3s;
+  margin: 16px 0 8px;
+}
+
+/* The original declares `transition-delay:.3 .5s` here, which is invalid CSS
+   and therefore dropped by the browser, leaving this link with no delay. */
+.nav__menu .links li:nth-last-child(1) a {
+  font-family: DMSans;
+  opacity: 0.6;
+  font-size: 2rem;
+}
+
+.nav__menu .links li a {
+  color: #0f0f0f;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 14vw;
+  line-height: 120%;
+  font-family: Antonia;
+  position: relative;
+  transform: translateY(115%);
+  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.nav__menu .links li a:hover {
+  color: #f0a500;
+}
+
+.nav__menu .socials {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  list-style: none;
+  padding: 40px 0 16px;
+}
+
+.nav__menu .socials li {
+  margin: 0 20px 0 0;
+  opacity: 0;
+}
+
+.nav__menu.open {
+  visibility: visible;
+}
+
+.nav__menu.open .bg {
+  opacity: 1;
+}
+
+.nav__menu.open .content {
+  transform: translate(0);
+}
+
+.nav__menu.open .content > a {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.nav__menu.open .links li a {
+  transform: translate(0);
+}
+
+.nav__menu.open .socials li {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .nav {
+    padding: 30px 3vw;
+  }
+
+  .nav__links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    background: #dcdcdc47;
+    color: #0f0f0f;
+    backdrop-filter: blur(10px);
+    padding: 0.3rem 0.3rem 0.3rem 40px;
+    border-radius: 500px;
+    transition: 0.3s;
+  }
+
+  .nav__links:hover {
+    background: #ffffffd7 !important;
+  }
+
+  .nav__links a {
+    transition: 0.2s;
+  }
+
+  .nav__links a:hover {
+    color: #ff633e;
+  }
+
+  .nav__links .cta-button {
+    min-width: 240px !important;
+  }
+
+  .nav__menu-btn {
+    display: none;
+  }
+}

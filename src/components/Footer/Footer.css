@@ -1,0 +1,334 @@
+.footer {
+  padding: 30vh 6vw 40px 6vw;
+  background: #fff;
+  position: relative;
+  margin-top: 20vh;
+}
+
+.footer__lines {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 40vh;
+  top: -15vh;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* White ellipse that masks the bars into the signature curved skyline. */
+.footer__lines:after {
+  content: '';
+  width: 150%;
+  height: 10vh;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -7%;
+  left: 50%;
+  translate: -50% 51%;
+  background-color: #fff;
+}
+
+.footer__lines .bar {
+  flex: 1 1 14.2857142857%;
+  transform-origin: bottom;
+  transform: scaleY(0);
+  background: linear-gradient(to top, #ff623d, transparent);
+}
+
+.footer__lines .bar:nth-child(1),
+.footer__lines .bar:nth-child(7) {
+  display: none;
+}
+
+.footer__lines .bar:nth-child(2),
+.footer__lines .bar:nth-child(6) {
+  background: linear-gradient(to top, #ea38d0, transparent);
+}
+
+.footer__lines .bar:nth-child(3),
+.footer__lines .bar:nth-child(5) {
+  background: linear-gradient(to top, #ff623d 30%, transparent);
+}
+
+.footer__lines .bar:nth-child(4) {
+  background: linear-gradient(to top, #ff623d 50%, transparent);
+}
+
+.footer__lines .--mark {
+  position: absolute;
+  top: auto;
+  right: unset;
+  bottom: 18%;
+  left: 50%;
+  translate: -50% 0;
+  scale: 0.75;
+}
+
+.footer__lines .--mark .logo {
+  color: #fff;
+  transform: scale(0);
+  width: 150px;
+  height: auto;
+}
+
+.footer__lines .--mark .avatar-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(0);
+  opacity: 0;
+}
+
+.footer__lines .--mark .avatar-wrap img {
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  animation: float 3s ease-in-out infinite;
+}
+
+.footer__lines .--mark .avatar-wrap.a1 {
+  width: 40px;
+  height: 40px;
+  top: 16%;
+  left: 10px;
+}
+
+.footer__lines .--mark .avatar-wrap.a1 img {
+  animation-delay: 1s;
+}
+
+.footer__lines .--mark .avatar-wrap.a2 {
+  top: -24px;
+  left: 100px;
+}
+
+.footer__lines .--mark .avatar-wrap.a2 img {
+  animation-delay: 1.5s;
+}
+
+.footer__lines .--mark .avatar-wrap.a3 {
+  width: 30px;
+  height: 30px;
+  top: 70px;
+  left: 95px;
+}
+
+@keyframes float {
+  0%,
+  to {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.footer .__cta {
+  margin: 24px 0;
+}
+
+.footer .__cta > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer .__cta > div .cta-button {
+  margin: 0;
+}
+
+.footer .__cta > div .cta-button p {
+  text-align: center;
+}
+
+.footer .__legal {
+  font-size: 1.5rem;
+  margin-top: 40px;
+  opacity: 0.4;
+  text-align: center;
+}
+
+.footer .__legal a {
+  font-size: inherit;
+}
+
+.footer .__legal > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.footer .__links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  margin-top: 40px;
+  border-top: 1px solid #eee;
+}
+
+.footer .__links a {
+  margin: 16px 0;
+  transition: color 0.3s;
+  font-size: 2rem;
+}
+
+.footer .__links a:hover {
+  color: #ff633e;
+}
+
+.footer .__links svg {
+  display: none;
+}
+
+.footer .__links div:first-child a {
+  text-align: right;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    margin-top: 50vh;
+  }
+
+  /* Warm glow bleeding up from below the fold. */
+  .footer:before {
+    content: '';
+    position: absolute;
+    bottom: -28%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 140%;
+    height: 42%;
+    filter: blur(40px);
+    background: radial-gradient(ellipse at center bottom, rgb(255, 98, 61) 60%, transparent 20%);
+    transition: all 0.6s;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .footer .__links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8vw;
+    margin-bottom: 10vh;
+  }
+
+  .footer .__links svg {
+    display: block;
+    width: 30px;
+    color: #e3e3e3;
+  }
+
+  .footer .__links div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .footer {
+    margin-top: 40vh;
+    padding: 40vh 3vw 40px 3vw;
+  }
+
+  .footer__lines {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    padding: 0 3vw;
+    height: 80vh;
+    top: -50vh;
+    left: 0;
+    overflow: hidden;
+  }
+
+  .footer__lines:after {
+    content: '';
+    width: 150%;
+    height: 30vh;
+    translate: -50% 65%;
+  }
+
+  .footer__lines .bar {
+    flex: 1 1 14.2857142857%;
+    transform-origin: bottom;
+    transform: scaleY(0);
+    background: linear-gradient(to top, #ff623d, transparent);
+  }
+
+  .footer__lines .bar:nth-child(1),
+  .footer__lines .bar:nth-child(7) {
+    display: block;
+    background: linear-gradient(to top, #b88af7, transparent);
+  }
+
+  .footer__lines .bar:nth-child(2),
+  .footer__lines .bar:nth-child(6) {
+    background: linear-gradient(to top, #ea38d0, transparent);
+  }
+
+  .footer__lines .bar:nth-child(3),
+  .footer__lines .bar:nth-child(5) {
+    background: linear-gradient(to top, #ff623d 20%, transparent);
+  }
+
+  .footer__lines .bar:nth-child(4) {
+    background: linear-gradient(to top, #ff623d 30%, transparent);
+  }
+
+  .footer__lines .--mark {
+    scale: 0.9;
+    bottom: 16%;
+  }
+
+  .footer .__cta > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: fit-content;
+    margin: auto;
+  }
+
+  .footer .__legal {
+    font-size: 1.5rem;
+    margin-top: 40px;
+    opacity: 0.4;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer .__legal > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .footer .__links {
+    gap: 5vw;
+    margin: 80px auto 108px;
+  }
+
+  .footer .__links div {
+    gap: 24px;
+    width: 36%;
+  }
+
+  .footer .__links div a {
+    flex: 1;
+  }
+
+  .footer .__links div:first-child a {
+    text-align: right;
+  }
+}

@@ -1,0 +1,14 @@
+/* Variable fonts shipped with the original site (reused as-is). */
+@font-face {
+  font-family: Antonia;
+  src: url(/fonts/Antonia-Variable.otf) format('opentype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: DMSans;
+  src: url(/fonts/DMSans-Variable.ttf);
+  font-style: normal;
+  font-display: swap;
+}

@@ -39,12 +39,13 @@
   pointer-events: none;
 }
 
+/* Site headline type: Antonia at the same weight/optical size as the rings hero h1. */
 .liquid-hero__heading {
-  font-family: DMSans;
-  font-weight: 600;
-  font-size: clamp(6rem, 11vw, 18rem);
-  line-height: 1;
-  letter-spacing: -0.035em;
+  font-family: Antonia;
+  font-variation-settings: 'wght' 425, 'opsz' 48;
+  font-weight: 400;
+  font-size: clamp(6rem, 10vw, 16rem);
+  line-height: 106%;
   text-shadow: 0 4px 40px rgba(180, 60, 40, 0.18);
 }
 
@@ -59,11 +60,13 @@
   gap: 24px;
 }
 
+/* Site body type: DM Sans, regular weight, as in the rings hero's side copy. */
 .liquid-hero__copy {
   max-width: 620px;
+  font-family: DMSans;
   font-size: 2.2rem;
   line-height: 1.45;
-  font-weight: 500;
+  font-weight: 400;
   text-shadow: 0 2px 20px rgba(180, 60, 40, 0.2);
 }
 
@@ -72,10 +75,10 @@
   align-items: stretch;
   gap: 8px;
   pointer-events: all;
-  font-size: 1.6rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  /* Site button type: the pill CTAs' 14px DM Sans, sentence case. */
+  font-family: DMSans;
+  font-size: 14px;
+  font-weight: 400;
   color: #0f0f0f;
 }
 

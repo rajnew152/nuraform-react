@@ -12,6 +12,17 @@
   border: none;
 }
 
+/* Opening line of the slider, lifted out of the pinned intro header above it. */
+.features__lead {
+  color: #7c7c7c;
+  font-size: 2rem;
+  line-height: 1.5;
+  text-align: center;
+  width: 88%;
+  max-width: 720px;
+  margin: 0 auto 6vh;
+}
+
 .features__slider {
   overflow-x: auto;
   -ms-overflow-style: none;

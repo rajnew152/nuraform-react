@@ -614,8 +614,9 @@
  * shadows and the thin outline are hidden. Only the voice-driven parts remain,
  * so the rings stay invisible at rest and glow and swell while someone speaks.
  */
+/* Over a photo the white outline reads as a hard line, so it is dropped entirely, even while speaking. */
 .banner__motifs .--circle.--photo .voice-rings__outline {
-  border-color: rgba(255, 255, 255, calc(var(--voice-3) * 0.9));
+  display: none;
 }
 
 .banner__motifs .--circle.--photo .voice-rings__ring.--outer {

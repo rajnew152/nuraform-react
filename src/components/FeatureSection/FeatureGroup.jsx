@@ -13,12 +13,14 @@ export default function FeatureGroup({ subtitle, heading, description, features,
 
   return (
     <div>
+      {/* With the intro header, the description opens the slider instead of sitting in the pin. */}
       <Title
         hasPadding
         subtitle={subtitle}
         heading={heading}
-        description={description}
+        description={introTitle ? undefined : description}
       />
+      {introTitle && description && <p className="features__lead">{description}</p>}
       <div className="features__slider" data-speed="1" data-lag="0">
         <div className="--track">
           {features.map((feature) => (

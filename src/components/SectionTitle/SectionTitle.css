@@ -32,11 +32,40 @@
   line-height: 1.5;
 }
 
-/* Intro-style header: glowing glyph zooms behind the word-by-word reveal. */
+/*
+ * Intro-style header, sized like the About intro: a 300vh block whose inner
+ * 100vh screen is pinned while its beats play; the glyph zooms behind them.
+ */
 .section-title--intro {
   position: relative;
+  height: 300vh;
+  overflow: hidden;
+}
+
+.section-title--intro .section-title__pin {
+  position: relative;
+  width: 100%;
+  height: 100vh;
   overflow: hidden;
   isolation: isolate;
+}
+
+/* Both beats sit centred on the pinned screen, one fading out as the next comes in. */
+.section-title--intro .section-title__beat {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 88%;
+}
+
+/* Beat 1: the subtitle set large, in the About intro's type. */
+.section-title--intro .section-title__lead {
+  font-family: Antonia;
+  font-variation-settings: 'wght' 325, 'opsz' 48;
+  font-size: 4.2rem;
+  line-height: 1.2;
+  color: #0f0f0f;
 }
 
 .section-title--intro .section-title__bg {
@@ -55,6 +84,16 @@
   will-change: transform, opacity, filter;
 }
 
+@media (min-width: 768px) {
+  .section-title--intro .section-title__beat {
+    width: 70%;
+  }
+
+  .section-title--intro .section-title__lead {
+    font-size: 6.5rem;
+  }
+}
+
 @media (min-width: 1025px) {
   .section-title.has-padding {
     padding: 15vh 3vw 5vh;
@@ -69,6 +108,18 @@
   .section-title__description {
     width: 38%;
     margin: 8px auto 40px;
+  }
+}
+
+/* Inside the centred beat, the heading and description size to the beat, not the page. */
+@media (min-width: 1025px) {
+  .section-title--intro .section-title__heading {
+    max-width: none;
+  }
+
+  .section-title--intro .section-title__description {
+    width: 60%;
+    margin: 16px auto 0;
   }
 }
 

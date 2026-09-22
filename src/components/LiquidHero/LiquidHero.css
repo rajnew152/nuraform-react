@@ -1,20 +1,19 @@
 .liquid-hero {
-  height: 100vh;
-  min-height: 560px;
+  min-height: 100vh;
   padding: 12px;
 }
 
 .liquid-hero__card {
   position: relative;
-  height: 100%;
+  min-height: calc(100vh - 24px);
   border-radius: 24px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  gap: 6vh;
-  padding: 120px 6vw 6vh;
+  gap: 5rem;
+  padding: 120px 6vw 4rem;
   color: #fff;
+  font-family: DMSans;
   /* Shown until (or instead of, without WebGL) the liquid canvas paints. */
   background:
     radial-gradient(circle at 20% 30%, #ffec8c 0%, transparent 45%),
@@ -31,94 +30,716 @@
   display: block;
 }
 
-.liquid-hero__heading,
-.liquid-hero__footer {
-  position: relative;
-  z-index: 1;
-  /* Text sits on the canvas but must not block the pointer from stirring it. */
+/* The wireframe globe, over the liquid and under the content. */
+.liquid-hero__globe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
   pointer-events: none;
 }
 
-/* Site headline type: Antonia at the same weight/optical size as the rings hero h1. */
-.liquid-hero__heading {
-  font-family: Antonia;
-  font-variation-settings: 'wght' 425, 'opsz' 48;
-  font-weight: 400;
-  font-size: clamp(6rem, 10vw, 16rem);
-  line-height: 106%;
-  text-shadow: 0 4px 40px rgba(180, 60, 40, 0.18);
+.liquid-hero ul {
+  list-style: none;
+  padding: 0;
 }
 
-.liquid-hero__heading span {
-  display: block;
+/* ---------------------------------------------------------------- layout */
+
+.liquid-hero__main,
+.liquid-hero__proof {
+  position: relative;
+  z-index: 1;
 }
 
-.liquid-hero__footer {
+.liquid-hero__main {
+  flex: 1;
+  display: grid;
+  align-items: center;
+  gap: 6rem;
+}
+
+/* Text sits on the canvas but must not block the pointer from stirring it. */
+.liquid-hero__text {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 24px;
+  pointer-events: none;
 }
 
-/* Site body type: DM Sans, regular weight, as in the rings hero's side copy. */
+/* Frosted pill above the headline, like the reference's announcement badge. */
+.liquid-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+  padding: 1.3rem 2.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.24);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/*
+ * Heavy, tightly set sans headline that closes on an italic serif phrase.
+ * Antonia ships no italic face, so the accent's slant is synthesized.
+ */
+.liquid-hero__heading {
+  max-width: 17ch;
+  font-size: clamp(4.4rem, 9vw, 6.4rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  text-shadow: 0 4px 40px rgba(180, 60, 40, 0.18);
+}
+
+.liquid-hero__heading em {
+  font-family: Antonia;
+  font-variation-settings: 'wght' 400, 'opsz' 48;
+  font-style: italic;
+  font-synthesis: style;
+  font-weight: 400;
+  font-size: 1.06em;
+  letter-spacing: -0.01em;
+}
+
+/* Compact supporting line under the headline. */
 .liquid-hero__copy {
-  max-width: 620px;
-  font-family: DMSans;
-  font-size: 2.2rem;
-  line-height: 1.45;
+  max-width: 56rem;
+  margin-top: 3rem;
+  font-size: 16px;
+  line-height: 1.35;
   font-weight: 400;
   text-shadow: 0 2px 20px rgba(180, 60, 40, 0.2);
 }
 
-.liquid-hero__cta {
+/* ------------------------------------------------------------ proof rows */
+
+.liquid-hero__proof {
   display: flex;
-  align-items: stretch;
-  gap: 8px;
-  pointer-events: all;
-  /* Site button type: the pill CTAs' 14px DM Sans, sentence case. */
-  font-family: DMSans;
-  font-size: 14px;
-  font-weight: 400;
-  color: #0f0f0f;
+  flex-direction: column;
+  gap: 1.6rem;
 }
 
-.liquid-hero__cta > span:first-child {
+.liquid-hero__stats,
+.liquid-hero__checks {
+  display: grid;
+  gap: 1.2rem;
+}
+
+/*
+ * Two layers per pill: the `li` drifts on a slow idle float (a CSS animation
+ * owns its transform), and `.--inner` takes the hover lift, so the two never
+ * fight over the same property.
+ */
+/* Only once the intro has finished: until then GSAP owns the `li` transform. */
+.liquid-hero__proof.is-settled li {
+  animation: pill-float 6s ease-in-out infinite alternate;
+}
+
+.liquid-hero__proof.is-settled li:nth-child(2) {
+  animation-delay: -1.5s;
+}
+
+.liquid-hero__proof.is-settled li:nth-child(3) {
+  animation-delay: -3s;
+}
+
+.liquid-hero__proof.is-settled li:nth-child(4) {
+  animation-delay: -4.5s;
+}
+
+@keyframes pill-float {
+  from {
+    transform: translateY(-2.5px);
+  }
+  to {
+    transform: translateY(2.5px);
+  }
+}
+
+.liquid-hero__stats .--inner,
+.liquid-hero__checks .--inner {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
-  padding: 2.2rem 3.6rem;
-  background: #fff;
-  border-radius: 6px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  gap: 1.4rem;
+  font-size: 15px;
+  transition:
+    transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1),
+    box-shadow 0.5s ease,
+    background-color 0.5s ease,
+    border-color 0.5s ease;
 }
 
-.liquid-hero__cta .--arrow {
+.liquid-hero__stats li:hover .--inner,
+.liquid-hero__checks li:hover .--inner {
+  transform: translateY(-7px) scale(1.035);
+}
+
+/* A light sweeping across the pill, once per hover. */
+.liquid-hero__stats .--inner::after,
+.liquid-hero__checks .--inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 32%, rgba(255, 255, 255, 0.55) 50%, transparent 68%);
+  translate: -130% 0;
+  transition: translate 0.85s cubic-bezier(0.3, 0.7, 0.3, 1);
+  pointer-events: none;
+}
+
+.liquid-hero__stats li:hover .--inner::after,
+.liquid-hero__checks li:hover .--inner::after {
+  translate: 130% 0;
+}
+
+.liquid-hero__stats svg,
+.liquid-hero__checks .--tick {
+  transition:
+    transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.55s ease;
+}
+
+.liquid-hero__stats li:hover svg {
+  transform: scale(1.22) rotate(-10deg);
+}
+
+.liquid-hero__checks li:hover .--tick {
+  transform: scale(1.18) rotate(8deg);
+  box-shadow: 0 0 0 0.7rem rgba(255, 99, 62, 0.22);
+}
+
+.liquid-hero__stats .--inner {
+  padding: 1.8rem 2.4rem;
+  border-radius: 18px;
+  background: #fff;
+  color: #1a1a1a;
+  box-shadow: 0 10px 30px rgba(150, 50, 30, 0.12);
+}
+
+.liquid-hero__stats li:hover .--inner {
+  box-shadow: 0 22px 50px rgba(150, 50, 30, 0.26);
+}
+
+.liquid-hero__stats svg {
+  flex: none;
+  color: #ff633e;
+}
+
+.liquid-hero__checks .--inner {
+  padding: 1.2rem 1.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.26);
+  font-weight: 500;
+}
+
+.liquid-hero__checks li:hover .--inner {
+  background: rgba(255, 255, 255, 0.42);
+  border-color: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 16px 36px rgba(150, 50, 30, 0.18);
+}
+
+.liquid-hero__checks .--tick {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  background: #ff633e;
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-hero__proof.is-settled li {
+    animation: none;
+  }
+
+  .liquid-hero__stats .--inner,
+  .liquid-hero__checks .--inner,
+  .liquid-hero__stats .--inner::after,
+  .liquid-hero__checks .--inner::after,
+  .liquid-hero__stats svg,
+  .liquid-hero__checks .--tick {
+    transition: none;
+  }
+
+  .liquid-hero__stats li:hover .--inner,
+  .liquid-hero__checks li:hover .--inner,
+  .liquid-hero__stats li:hover svg,
+  .liquid-hero__checks li:hover .--tick {
+    transform: none;
+  }
+
+  .liquid-hero__stats li:hover .--inner::after,
+  .liquid-hero__checks li:hover .--inner::after {
+    translate: -130% 0;
+  }
+}
+
+/* ------------------------------------------------------------ demo panel */
+
+.demo-panel {
+  --voice-0: 0;
+  --voice-1: 0;
+  --orb: min(19rem, 22vh);
+  width: min(100%, 54rem);
+  justify-self: center;
+}
+
+/*
+ * Only the panel card itself is frosted (backdrop blur). Each blur re-samples
+ * the moving liquid and globe every frame, so the small pills use a slightly
+ * stronger tint instead.
+ */
+.demo-panel__toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 6.2rem;
-  border-radius: 6px;
-  background: #0f0f0f;
+  gap: 1.6rem;
+  width: fit-content;
+  margin: 0 auto 1.6rem;
+  padding: 0.8rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.demo-panel__mode {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 0;
+  background: none;
+  color: rgba(255, 255, 255, 0.6);
+  font: 500 15px DMSans;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.demo-panel__mode.is-active {
   color: #fff;
+}
+
+/* A proper switch between the two labels: knob left for voice, right for text. */
+.demo-panel__switch {
+  position: relative;
+  width: 8.4rem;
+  height: 4.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+.demo-panel__switch span {
+  position: absolute;
+  top: 50%;
+  left: 0.5rem;
+  width: 3.8rem;
+  height: 3.8rem;
+  translate: 0 -50%;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(120, 40, 20, 0.25);
+  transition: left 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.demo-panel__switch.is-on span {
+  left: calc(100% - 4.3rem);
+}
+
+.demo-panel__card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  padding: 2.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 30px 80px rgba(150, 50, 30, 0.18);
+}
+
+/* Both views share one grid cell; the inactive one fades out but stays mounted. */
+.demo-panel__views {
+  display: grid;
+}
+
+.demo-panel__view {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s;
+}
+
+.demo-panel__view:not(.is-active) {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Voice view: orb in a frosted ring, waveform beneath, then the mic status. */
+.demo-panel__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  padding: 2.4rem 0 1.6rem;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.04));
+}
+
+/*
+ * The frosted ring around the orb, which is also the tap target. It clips the
+ * scene, so the orb can swell into the ring as the user speaks.
+ */
+.demo-panel__orb {
+  position: relative;
+  overflow: hidden;
+  width: calc(var(--orb) + 3.6rem);
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 0 0 1.4rem rgba(255, 255, 255, 0.08),
+    0 0 calc(var(--voice-0) * 8rem) calc(var(--voice-0) * 2rem) rgba(255, 158, 120, calc(var(--voice-0) * 0.6));
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.demo-panel__orb:hover {
+  transform: scale(1.03);
+}
+
+.demo-panel__orb:focus-visible,
+.demo-panel__sample:focus-visible,
+.demo-panel__action:focus-visible,
+.demo-panel__mode:focus-visible,
+.demo-panel__switch:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.demo-panel__orb:disabled {
+  cursor: default;
+}
+
+/*
+ * The hero rings' "Ai Voice" scene. At rest its orb spans about
+ * 1/--orb-fill of the canvas, so the canvas is scaled until the orb matches
+ * --orb. `screen` drops the scene's black backdrop out (black adds no light)
+ * and the filters soften the orb to a light peach. All of this stays on the
+ * GPU; an SVG `url()` filter here forced a slow software path every frame.
+ * No contrast(): it would lift the black backdrop into a grey haze.
+ */
+.demo-panel__glow {
+  --orb-fill: 4.35;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: calc(var(--orb) * var(--orb-fill));
+  aspect-ratio: 1 / 1;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  filter: hue-rotate(150deg) saturate(0.55) brightness(1.65);
+  -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 70%, transparent 100%);
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.demo-panel__glow.is-ready {
+  opacity: 0.9;
+}
+
+.demo-panel.is-listening .demo-panel__glow {
+  opacity: 1;
+}
+
+/* Bars rest low and jump with the voice level while listening. */
+.demo-panel__wave {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 80%;
+  height: 5rem;
+}
+
+.demo-panel__wave span {
+  flex: 1;
+  max-width: 3px;
+  height: calc(min(1, var(--h) * (0.45 + var(--voice-1) * 1.6)) * 100%);
+  min-height: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.75);
+  transition: height 0.12s linear;
+}
+
+.demo-panel.is-listening .demo-panel__wave span {
+  animation: demo-wave 0.9s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i) * -0.07s);
+}
+
+@keyframes demo-wave {
+  to {
+    scale: 1 0.55;
+  }
+}
+
+.demo-panel__status {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.demo-panel__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.demo-panel__sample,
+.demo-panel__point {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font: 600 14px DMSans;
+  text-align: left;
+}
+
+.demo-panel__sample {
+  padding: 1.2rem 2.4rem 1.2rem 1.2rem;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.liquid-hero__cta .--arrow svg {
-  width: 22px;
-  height: 22px;
-  transition: transform 0.3s ease;
+.demo-panel__sample:hover,
+.demo-panel__sample.is-playing {
+  background: rgba(255, 255, 255, 0.28);
 }
 
-.liquid-hero__cta:hover > span:first-child {
+.demo-panel__play {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 5.2rem;
+  height: 5.2rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.demo-panel__sample-title {
+  flex: 1;
+  line-height: 1.3;
+}
+
+.demo-panel__sample-wave {
+  flex: none;
+  opacity: 0.85;
+}
+
+.demo-panel__sample-time {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Text view: a phone rising out of a brand-gradient screen, then the points. */
+.demo-panel__screen {
+  display: flex;
+  justify-content: center;
+  height: calc(var(--orb) + 17rem);
+  padding-top: 2.4rem;
+  overflow: hidden;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.35), transparent 60%),
+    linear-gradient(160deg, #ff8a5c, #ff5f8f);
+}
+
+.demo-phone {
+  width: 26rem;
+  height: 60rem;
+  padding: 1.4rem 1.6rem;
+  border: 6px solid #1a1a1a;
+  border-radius: 40px;
+  background: #fff;
+  color: #1a1a1a;
+  box-shadow: 0 20px 40px rgba(80, 20, 20, 0.3);
+}
+
+.demo-phone__bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.demo-phone__island {
+  width: 8.4rem;
+  height: 2.6rem;
+  border-radius: 999px;
+  background: #1a1a1a;
+}
+
+.demo-phone__signal {
+  width: 3rem;
+  height: 1.2rem;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #1a1a1a 70%, rgba(26, 26, 26, 0.3) 70%);
+}
+
+.demo-phone__head {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.4rem;
+}
+
+.demo-phone__back {
+  position: absolute;
+  top: 0.8rem;
+  left: 0;
+  color: #888;
+}
+
+.demo-phone__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff633e, #ff5f8f);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.demo-phone__name {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.demo-phone__stamp {
+  margin: 1rem 0;
+  text-align: center;
+  font-size: 9px;
+  color: #999;
+}
+
+.demo-phone__thread {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.demo-phone__bubble {
+  max-width: 78%;
+  padding: 0.8rem 1.2rem;
+  border-radius: 14px;
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.demo-phone__bubble.--lead {
+  align-self: flex-start;
+  background: #ececef;
+  border-bottom-left-radius: 4px;
+}
+
+.demo-phone__bubble.--agent {
+  align-self: flex-end;
+  background: #ff633e;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.demo-panel__point {
+  padding: 1.2rem 2rem;
+  font-weight: 500;
+}
+
+.demo-panel__point svg {
+  flex: none;
+  opacity: 0.9;
+}
+
+/* "Talk to AI" (solid) and "Talk to a Human" (frosted), shared by both views. */
+.demo-panel__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.demo-panel__action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1.8rem 1.6rem;
+  border-radius: 999px;
+  font: 500 15px DMSans;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.demo-panel__action.--solid {
+  border: 0;
+  background: #fff;
+  color: #0f0f0f;
+}
+
+.demo-panel__action.--solid:hover {
   background: #0f0f0f;
   color: #fff;
 }
 
-.liquid-hero__cta:hover .--arrow {
-  background: #ff633e;
+.demo-panel__action.--ghost {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
 }
 
-.liquid-hero__cta:hover .--arrow svg {
-  transform: translateX(4px);
+.demo-panel__action.--ghost:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.demo-panel__action:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+/* ----------------------------------------------------------- breakpoints */
+
+@media (min-width: 640px) {
+  .liquid-hero__checks {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (min-width: 768px) {
@@ -127,16 +748,29 @@
   }
 
   .liquid-hero__card {
-    padding: 140px 3vw 6vh;
+    min-height: calc(100vh - 40px);
+    padding: 130px 3vw 4rem;
   }
 
-  .liquid-hero__footer {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;
+  .liquid-hero__stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .liquid-hero__main {
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
-  .liquid-hero__copy {
-    font-size: 2.8rem;
+  .liquid-hero__heading {
+    font-size: clamp(5.6rem, 3.9vw, 9.6rem);
+  }
+
+  .demo-panel {
+    width: clamp(44rem, 30vw, 54rem);
+  }
+
+  .liquid-hero__checks {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

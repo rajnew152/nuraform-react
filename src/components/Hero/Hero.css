@@ -162,7 +162,7 @@
  * Concentric embossed rings that fill the hero circle. `--voice-0..3` are
  * written by VoiceGlow while the mic is live (0 at rest): the inner disc
  * reacts first and each ring outside it follows a beat later, so speech
- * ripples outward as a soft magenta glow and a slight swell.
+ * ripples outward as a soft coral glow and a slight swell.
  */
 .banner__motifs .--circle .voice-rings {
   --voice-0: 0;
@@ -185,7 +185,7 @@
 
 .banner__motifs .--circle .voice-rings__halo {
   width: 100%;
-  box-shadow: inset 0 0 calc(4rem + var(--voice-3) * 22rem) rgba(236, 72, 153, calc(var(--voice-3) * 0.95));
+  box-shadow: inset 0 0 calc(4rem + var(--voice-3) * 22rem) rgba(255, 99, 62, calc(var(--voice-3) * 0.95));
 }
 
 .banner__motifs .--circle .voice-rings__outline {
@@ -206,7 +206,7 @@
     inset 3px 4px 8px rgba(255, 255, 255, 0.55),
     inset -6px -8px 16px rgba(214, 90, 90, 0.2),
     10px 16px 40px rgba(214, 90, 100, 0.22),
-    0 0 calc(var(--voice-2) * 14rem) calc(var(--voice-2) * 3.5rem) rgba(236, 72, 153, calc(var(--voice-2) * 0.95));
+    0 0 calc(var(--voice-2) * 14rem) calc(var(--voice-2) * 3.5rem) rgba(255, 99, 62, calc(var(--voice-2) * 0.95));
   scale: calc(1 + var(--voice-2) * 0.08);
   filter: brightness(calc(1 + var(--voice-2) * 0.14)) saturate(calc(1 + var(--voice-2) * 0.5));
 }
@@ -218,7 +218,7 @@
     inset 3px 4px 8px rgba(255, 255, 255, 0.55),
     inset -5px -7px 14px rgba(214, 90, 90, 0.18),
     8px 14px 32px rgba(214, 90, 100, 0.22),
-    0 0 calc(var(--voice-1) * 12rem) calc(var(--voice-1) * 3rem) rgba(200, 120, 255, calc(var(--voice-1) * 1));
+    0 0 calc(var(--voice-1) * 12rem) calc(var(--voice-1) * 3rem) rgba(255, 158, 120, calc(var(--voice-1) * 1));
   scale: calc(1 + var(--voice-1) * 0.1);
   filter: brightness(calc(1 + var(--voice-1) * 0.16)) saturate(calc(1 + var(--voice-1) * 0.5));
   animation-delay: -1.2s;
@@ -229,13 +229,13 @@
   width: 42%;
   overflow: hidden;
   background:
-    radial-gradient(circle, rgba(236, 72, 153, calc(var(--voice-0) * 0.45)) 0%, transparent 62%),
+    radial-gradient(circle, rgba(255, 99, 62, calc(var(--voice-0) * 0.45)) 0%, transparent 62%),
     radial-gradient(circle at 35% 30%, #fed9c8, #f8b4a4 75%);
   box-shadow:
     inset 3px 4px 8px rgba(255, 255, 255, 0.6),
     inset -4px -6px 12px rgba(214, 90, 90, 0.16),
     6px 10px 26px rgba(214, 90, 100, 0.22),
-    0 0 calc(var(--voice-0) * 10rem) calc(var(--voice-0) * 2.4rem) rgba(236, 72, 153, calc(var(--voice-0) * 1));
+    0 0 calc(var(--voice-0) * 10rem) calc(var(--voice-0) * 2.4rem) rgba(255, 99, 62, calc(var(--voice-0) * 1));
   scale: calc(1 + var(--voice-0) * 0.14);
   animation-delay: -2.4s;
 }
@@ -259,7 +259,7 @@
 /*
  * Voice orb. The scene paints onto an opaque black backdrop, which `screen`
  * drops out against the inner disc, and the hue shift pulls its stock blue
- * into the hero's magenta/lavender. The radial mask feathers the canvas edge.
+ * into the site's coral/peach accent. The radial mask feathers the canvas edge.
  */
 .banner__motifs .--circle .voice-glow {
   position: absolute;
@@ -269,7 +269,7 @@
   width: 140%;
   aspect-ratio: 1/1;
   mix-blend-mode: screen;
-  filter: hue-rotate(40deg) saturate(1.2);
+  filter: hue-rotate(160deg) saturate(1.3);
   -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent 100%);
   mask-image: radial-gradient(closest-side, #000 70%, transparent 100%);
   opacity: 0;
@@ -594,7 +594,7 @@
  * light shows, which is what the orb's own `screen` blend did on the old fill.
  */
 .banner__motifs .--circle.--photo .voice-rings__ring.--inner {
-  background: radial-gradient(circle, rgba(236, 72, 153, calc(var(--voice-0) * 0.45)) 0%, transparent 62%);
+  background: radial-gradient(circle, rgba(255, 99, 62, calc(var(--voice-0) * 0.45)) 0%, transparent 62%);
   mix-blend-mode: screen;
 }
 
@@ -621,17 +621,17 @@
 
 .banner__motifs .--circle.--photo .voice-rings__ring.--outer {
   box-shadow: 0 0 calc(var(--voice-2) * 14rem) calc(var(--voice-2) * 3.5rem)
-    rgba(236, 72, 153, calc(var(--voice-2) * 0.95));
+    rgba(255, 99, 62, calc(var(--voice-2) * 0.95));
 }
 
 .banner__motifs .--circle.--photo .voice-rings__ring.--middle {
   box-shadow: 0 0 calc(var(--voice-1) * 12rem) calc(var(--voice-1) * 3rem)
-    rgba(200, 120, 255, calc(var(--voice-1) * 1));
+    rgba(255, 158, 120, calc(var(--voice-1) * 1));
 }
 
 .banner__motifs .--circle.--photo .voice-rings__ring.--inner {
   box-shadow: 0 0 calc(var(--voice-0) * 10rem) calc(var(--voice-0) * 2.4rem)
-    rgba(236, 72, 153, calc(var(--voice-0) * 1));
+    rgba(255, 99, 62, calc(var(--voice-0) * 1));
 }
 
 /*

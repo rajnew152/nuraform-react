@@ -26,8 +26,13 @@ export default function LiquidHero() {
   const sectionRef = useRef(null);
   const cardRef = useRef(null);
   const globeRef = useRef({ ...GLOBE_START });
-  /* The panel's voice orb is a third WebGL scene: start it only after the intro. */
   const [introDone, setIntroDone] = useState(false);
+  /*
+   * The panel's voice orb is a third WebGL scene. It is held back briefly so
+   * it doesn't load into the intro's busiest moment, then started a second in
+   * rather than after the whole intro, which kept it blank for too long.
+   */
+  const [orbReady, setOrbReady] = useState(false);
 
   useGsapEffect(() => {
     const section = sectionRef.current;
@@ -140,13 +145,16 @@ export default function LiquidHero() {
       if (started) return;
       started = true;
       requestAnimationFrame(() => requestAnimationFrame(() => intro.play()));
+      orbTimer = setTimeout(() => setOrbReady(true), 1000);
     };
+    let orbTimer = 0;
     if (document.readyState === 'complete') start();
     else window.addEventListener('load', start, { once: true });
     const fallback = setTimeout(start, 1200);
 
     return () => {
       clearTimeout(fallback);
+      clearTimeout(orbTimer);
       window.removeEventListener('load', start);
     };
   }, sectionRef);
@@ -171,7 +179,7 @@ export default function LiquidHero() {
             <p className="liquid-hero__copy liquid-hero__reveal">{LIQUID_HERO.copy}</p>
           </div>
 
-          <DemoPanel className="liquid-hero__reveal" orbReady={introDone} />
+          <DemoPanel className="liquid-hero__reveal" orbReady={orbReady} />
         </div>
 
         <div className={`liquid-hero__proof${introDone ? ' is-settled' : ''}`}>

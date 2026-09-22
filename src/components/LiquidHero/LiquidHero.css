@@ -293,6 +293,12 @@
   justify-self: center;
 }
 
+.demo-panel__defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
 /*
  * Only the panel card itself is frosted (backdrop blur). Each blur re-samples
  * the moving liquid and globe every frame, so the small pills use a slightly
@@ -453,12 +459,16 @@
   width: calc(var(--orb) * var(--orb-fill));
   aspect-ratio: 1 / 1;
   pointer-events: none;
-  mix-blend-mode: screen;
-  filter: hue-rotate(150deg) saturate(0.55) brightness(1.65);
+  /*
+   * Black goes fully transparent first (the SVG filter), then the orb is
+   * softened to a light peach. `screen` blending was cheaper but left the
+   * backdrop showing as a dark disc here.
+   */
+  filter: url(#demo-orb-black-out) hue-rotate(150deg) saturate(0.55) contrast(0.7) brightness(1.65);
   -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent 100%);
   mask-image: radial-gradient(closest-side, #000 70%, transparent 100%);
   opacity: 0;
-  transition: opacity 1.2s ease;
+  transition: opacity 0.5s ease;
 }
 
 .demo-panel__glow.is-ready {

@@ -128,10 +128,22 @@ export default function DemoPanel({ className = '', orbReady = true }) {
 
   return (
     <div className={`demo-panel ${listening ? 'is-listening' : ''} ${className}`} ref={levelsRef}>
-      {/* Turns the orb scene's black backdrop transparent: alpha follows brightness. */}
+      {/*
+        * Keeps the orb light at every level, so it never shows dark shading:
+        * 1. alpha = brightness, scaled up past a negative offset, so dim
+        *    pixels (the scene's black backdrop and its shadowed side) are cut
+        *    out rather than left as grey-brown haze;
+        * 2. a gamma curve lifts whatever survives well into the bright range,
+        *    so mid-tones read as light coral instead of dark red.
+        */}
       <svg className="demo-panel__defs" aria-hidden="true" focusable="false">
         <filter id="demo-orb-black-out" colorInterpolationFilters="sRGB">
-          <feColorMatrix type="matrix" values="1.3 0 0 0 0  0 1.3 0 0 0  0 0 1.3 0 0  1.1 1.1 1.1 0 0" />
+          <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  2.2 2.2 2.2 0 -0.5" />
+          <feComponentTransfer>
+            <feFuncR type="gamma" amplitude="1.25" exponent="0.4" offset="0.08" />
+            <feFuncG type="gamma" amplitude="1.25" exponent="0.4" offset="0.08" />
+            <feFuncB type="gamma" amplitude="1.25" exponent="0.4" offset="0.08" />
+          </feComponentTransfer>
         </filter>
       </svg>
       <audio ref={audioRef} onEnded={() => setPlaying(-1)} onError={() => setPlaying(-1)} preload="none" />
